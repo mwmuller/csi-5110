@@ -69,4 +69,45 @@ Enable cheaper Hardware to process information and models.
 FPGA are fast but more costly compared to MC/Arduino, but are almost required to provide processing power lacked by the ladder. 
 
 ## Project Idea
-Project would be Edge devices (preferably using an Pynq if possible) to compute data more efficiently with usign software and CPU to handle fp and general user interfacing. 
+Project would be Edge devices (preferably using an Pynq if possible) to compute data more efficiently with usign software and CPU to handle fp and general user interfacing.
+
+
+## Channels and MAcs and Parameters
+parameters
+Number of groups is equal to input we get Co/g, 1
+Macs:
+
+co, ci, kh, kw, ho, wo
+with grouping we get ci/g * kh * kw * co * ho* wo
+
+With epthwise, we say g = ci so we get:
+1 * kh * kw * co * ho * w
+
+
+160 * (160 * 6) * 1
+160 * 6 * 3 * 3
+180 * 160 * 6
+
+160*6 = 960
+160 * 960 + 960 * 9 + 160 * 960=> 960(160+160+9)=> 960 * H * W * 329
+
+Linear quantization is 
+r = S(q - Z)
+r = tensor
+S = scale
+q = quantized tensor
+Z = zero_point
+
+rmax - rmin = S(qmax - Z) - S(qmin - Z)
+rmax - rmin = a
+a = S[(qmax - z) - (qmin - z)] -> qmax-z - qmin-z = b
+
+a/b = S=> rmax - rmin/(qmax-z) - (qmin-z)=> (qmax - qmin) - (z + z)=>
+4-3 - 2-3 => qmax - z - qmin + z
+q = r/s + z
+rmin = s(qmin -z)
+rmin = sqmin - sz
+rmin / S = qmin - z
+rmin / s + z - qmin
+
+z = qmin - rmin / s

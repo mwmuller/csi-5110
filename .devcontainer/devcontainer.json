@@ -15,7 +15,9 @@
 				"ms-vscode.cpptools",
 				"mshr-h.veriloghdl",
 				"ms-python.python",
-				"ms-python.debugpy"], 
+				"ms-python.debugpy",
+				"ms-toolsai.jupyter-keymap",
+				"sbsnippets.pytorch-snippets"], 
 			"settings": {
 				"terminal.integrated.defaultProfile.linux": "bash"
 			}
